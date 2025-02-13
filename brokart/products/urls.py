@@ -1,3 +1,4 @@
+
 """
 URL configuration for brokart project.
 
@@ -14,15 +15,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('products.urls')),
-    path('customers/',include('customers.urls')),
-    path('orders/',include('orders.urls')),
+    path('', views.index,name='home'),
+    path('product_list',views.list_products,name='list_product'),
+    path('product_details/<pk>',views.detail_product,name='detail_product'),
 ]
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
